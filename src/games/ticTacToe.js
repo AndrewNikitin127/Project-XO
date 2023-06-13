@@ -1,11 +1,12 @@
+import chalk from 'chalk';
 import { getRandomInt, askQuestionRange } from '../tools.js';
 
 const printBoard = (board) => {
-  console.log(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `);
-  console.log('-----|-----|-----');
-  console.log(` ${board[1][0]} | ${board[1][1]} | ${board[1][2]} `);
-  console.log('-----|-----|-----');
-  console.log(` ${board[2][0]} | ${board[2][1]} | ${board[2][2]} \n`);
+  console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));
+  console.log(chalk.strikethrough.bold('-----|-----|-----'));
+  console.log(chalk.bold(` ${board[1][0]} | ${board[1][1]} | ${board[1][2]} `));
+  console.log(chalk.strikethrough.bold('-----|-----|-----'));
+  console.log(chalk.bold(` ${board[2][0]} | ${board[2][1]} | ${board[2][2]} \n`));
 };
 
 const boardHasEmptyCell = (board, emptyCell) => {
@@ -42,11 +43,11 @@ const checkWinner = (board, emptyCell) => {
 
 const printWinner = (winner, charPlayer1, charComputer) => {
   if (winner === charPlayer1) {
-    console.log(' вы победили');
+    console.log(chalk.hex('#A1FFA3')('вы победили'));
   } else if (winner === charComputer) {
-    console.log('вы проиграли');
+    console.log(chalk.hex('#FF4F5A')('вы проиграли'));
   } else {
-    console.log('ничья');
+    console.log(chalk.hex('#71B0E8')('ничья'));
   }
 };
 
@@ -54,11 +55,11 @@ const getPlayerMove = (board, emptyCell) => {
   let x;
   let y;
   do {
-    console.log('ваш ход\n');
-    x = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
-    y = askQuestionRange('ведите номер ячейки #(1-3): ', 1, 3) - 1;
+    console.log(chalk.hex('#EFC09D')('ваш ход\n'));
+    x = askQuestionRange(chalk.hex('#B6E1FA')('ведите номер строки #(1-3): '), 1, 3) - 1;
+    y = askQuestionRange(chalk.hex('#B6E1FA')('ведите номер ячейки #(1-3): '), 1, 3) - 1;
 
-    if (board[x][y] !== emptyCell) console.log('Ячейка уже занята');
+    if (board[x][y] !== emptyCell) console.log(chalk.hex('#DA104C')('Ячейка уже занята'));
   } while (board[x][y] !== emptyCell);
   return [x, y];
 };
@@ -81,8 +82,8 @@ export default () => {
     [emptyCell, emptyCell, emptyCell],
     [emptyCell, emptyCell, emptyCell],
   ];
-  const charPlayer1 = ' X ';
-  const charComputer = ' 0 ';
+  const charPlayer1 = chalk.hex('#CDB861').bold(' X ');
+  const charComputer = chalk.hex('#C38CD0').bold(' 0 ');
   let winner = emptyCell;
 
   while (gameCanContinue(winner, board, emptyCell)) {

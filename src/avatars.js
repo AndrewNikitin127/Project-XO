@@ -1,4 +1,5 @@
 import readlineSync from 'readline-sync';
+import chalk from 'chalk';
 
 const avatarCat = ['  (\\___/)\n   (=‘.’=)\nE[:]|||||[:]З\n   (“)_(”)',
   '/\\_/\\\n((@v@))\n():::()\n VV-VV',
@@ -9,7 +10,7 @@ const avatarCat = ['  (\\___/)\n   (=‘.’=)\nE[:]|||||[:]З\n   (“)_(”)',
   '__    __\n/ \\\\..// \\\n  ( oo )\n   \\__/'];
 
 const selectAvatar = () => {
-  const indexAvatar = readlineSync.keyInSelect(avatarCat, 'Выбери аватарку:');
+  const indexAvatar = readlineSync.keyInSelect(avatarCat, chalk.hex('#EFC09D')('Выбери аватарку:'));
   return `\n ${avatarCat[indexAvatar]}`;
 };
 

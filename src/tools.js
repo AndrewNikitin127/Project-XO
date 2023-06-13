@@ -1,4 +1,6 @@
 import readlineSync from 'readline-sync';
+import chalk from 'chalk';
+
 // тут храним и экспортируем
 // самописные функции, и константы, которые используем больше чем в одном файле
 
@@ -12,7 +14,7 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) +
  * @returns {int} number from the user */
 const askQuestionRange = (question, begin, end) => +readlineSync.question(question, {
   limit: new RegExp(`^[${begin}-${end}]$`),
-  limitMessage: 'Извините, $<lastInput> не подходит.',
+  limitMessage: chalk.hex('#DA104C')('Извините, $<lastInput> не подходит.'),
 });
 
 export { getRandomInt, askQuestionRange };
