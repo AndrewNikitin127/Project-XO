@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { askQuestionRange } from '../tools.js';
+import { askQuestionRange, getRandomInt } from '../tools.js';
 import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
@@ -47,18 +47,30 @@ export default (gameConf) => {
     [emptyCell, emptyCell, emptyCell],
     [emptyCell, emptyCell, emptyCell],
   ];
-  const charPlayer1 = chalk.hex('#CDB861')(' X ');
-  const charPlayer2 = chalk.hex('#C38CD0')(' 0 ');
+  const colorX = chalk.hex('#CDB861')(' X ');
+  const colorY = chalk.hex('#C38CD0')(' 0 ');
+
+  const charPlayer1 = getRandomInt(0, 1) === 0 ? colorX : colorY;
+  const charPlayer2 = charPlayer1 === colorX ? colorY : colorX;
+
+  const getMove = (color) => (charPlayer1 === color
+    ? getPlayerMove1 : getPlayerMove2);
+
+  const move = {
+    first: getMove(colorX),
+    second: getMove(colorY),
+  };
+
   let winner = emptyCell;
 
   while (gameCanContinue(winner, board, emptyCell)) {
     printBoard(board);
-    const [x, y] = getPlayerMove1(board, emptyCell, playerOneName);
+    const [x, y] = move.first(board, emptyCell, playerOneName);
     board[x][y] = charPlayer1;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
     printBoard(board);
-    const [a, z] = getPlayerMove2(board, emptyCell, playerTwoName);
+    const [a, z] = move.second(board, emptyCell, playerTwoName);
     board[a][z] = charPlayer2;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
