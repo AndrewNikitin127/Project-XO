@@ -20,8 +20,8 @@ const getPlayerMove = (board, emptyCell) => {
   let y;
   do {
     console.log(chalk.hex('#EFC09D')('ваш ход\n'));
-    x = askQuestionRange(chalk.hex('#B6E1FA')('ведите номер строки #(1-3): '), 1, 3) - 1;
-    y = askQuestionRange(chalk.hex('#B6E1FA')('ведите номер ячейки #(1-3): '), 1, 3) - 1;
+    x = askQuestionRange(chalk.hex('#B6E1FA')('Введите номер строки #(1-3): '), 1, 3) - 1;
+    y = askQuestionRange(chalk.hex('#B6E1FA')('Введите номер ячейки #(1-3): '), 1, 3) - 1;
 
     if (board[x][y] !== emptyCell) console.log(chalk.hex('#DA104C')('Ячейка уже занята'));
   } while (board[x][y] !== emptyCell);
