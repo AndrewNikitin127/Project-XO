@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { askQuestionRange } from '../tools.js';
+import { askQuestionRange, getRandomInt } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
   viewComputerWaiting, getStupidComputerAiMove,
@@ -42,8 +42,9 @@ export default (gameConf) => {
   ];
   const colorX = chalk.hex('#CDB861').bold(' X ');
   const colorY = chalk.hex('#C38CD0').bold(' 0 ');
-  const charPlayer1 = colorX;
-  const charComputer = colorY;
+
+  const charPlayer1 = getRandomInt(0, 1) === 0 ? colorX : colorY;
+  const charComputer = charPlayer1 === colorX ? colorY : colorX;
 
   const { name, avatar, difficulty } = gameConf.playerOne;
 
