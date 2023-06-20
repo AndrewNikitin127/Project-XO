@@ -2,15 +2,15 @@ import chalk from 'chalk';
 import { askQuestionRange } from '../tools.js';
 import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
 
-const printWinner = (winner, charPlayer1, charPlayer2, playerOneName, playerTwoName) => {
+function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')(` победил ${playerOneName} `));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name}\n${gameConf.playerOne.avatar}\nПоздравляем с победой!!! `));
   } else if (winner === charPlayer2) {
-    console.log(chalk.hex('#A1FFA3')(` победил ${playerTwoName}`));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name}\n${gameConf.playerTwo.avatar}\nПоздравляем с победой!!!`));
   } else {
     console.log(chalk.hex('#71B0E8')('ничья'));
   }
-};
+}
 
 const getPlayerMove1 = (board, emptyCell, playerOneName) => {
   let x;
@@ -64,5 +64,5 @@ export default (gameConf) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   printBoard(board);
-  printWinner(winner, charPlayer1, charPlayer2, playerOneName, playerTwoName);
+  printWinner(winner, charPlayer1, charPlayer2, gameConf);
 };
