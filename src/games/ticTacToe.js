@@ -1,6 +1,9 @@
 import chalk from 'chalk';
-import { getRandomInt, askQuestionRange, pause } from '../tools.js';
-import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
+import { askQuestionRange } from '../tools.js';
+import {
+  checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
+  viewComputerWaiting, getStupidComputerAiMove,
+} from './ticTacToe_tools.js';
 
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
   if (winner === charPlayer1) {
@@ -24,24 +27,13 @@ const getPlayerMove = (board, emptyCell) => {
   } while (board[x][y] !== emptyCell);
   return [x, y];
 };
-
-const getComputerMove = (board, emptyCell) => {
-  let x;
-  let y;
-
-  do {
-    x = getRandomInt(0, 2);
-    y = getRandomInt(0, 2);
-  } while (board[x][y] !== emptyCell);
-  return [x, y];
+const computerMove = {
+  normal: getComputerRandomMove,
+  easy: getStupidComputerAiMove,
+  hard: getComputerAiMove,
 };
 
-const getMove = (color, charPlayer1) => (charPlayer1 === color
-  ? getPlayerMove : getComputerMove);
-
 export default (gameConf) => {
-  const playerOneName = gameConf.playerOne.name;
-  const playerOneAvatar = gameConf.playerOne.avatar;
   const emptyCell = '   ';
   const board = [
     [emptyCell, emptyCell, emptyCell],
@@ -52,31 +44,38 @@ export default (gameConf) => {
   const colorY = chalk.hex('#C38CD0').bold(' 0 ');
   const charPlayer1 = colorX;
   const charComputer = colorY;
-  let winner = emptyCell;
+
+  const { name, avatar, difficulty } = gameConf.playerOne;
+
+  const getMove = (color) => (charPlayer1 === color
+    ? getPlayerMove : computerMove[difficulty]);
 
   const move = {
     first: getMove(colorX, charPlayer1),
     second: getMove(colorY, charPlayer1),
   };
 
+  let winner = emptyCell;
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
     printBoard(board);
-    const [x, y] = move.first(board, emptyCell);
+    viewComputerWaiting(charComputer, colorX);
+    const [x, y] = move.first(board, emptyCell, charPlayer1, charComputer);
     board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
+
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
+    viewComputerWaiting(charComputer, colorY);
     printBoard(board);
-    console.log('🤖 Компьютер думает...');
-    pause(1200);
-    const [a, z] = move.second(board, emptyCell);
+    const [a, z] = move.second(board, emptyCell, charPlayer1, charComputer);
     board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
+
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
   printBoard(board);
-  printWinner(winner, charPlayer1, charComputer, playerOneName, playerOneAvatar);
+  printWinner(winner, charPlayer1, charComputer, name, avatar);
 };

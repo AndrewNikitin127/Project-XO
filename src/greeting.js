@@ -2,9 +2,16 @@ import readlineSync from 'readline-sync';
 import chalk from 'chalk';
 import selectAvatar from './avatars.js';
 
+const askDifficulty = () => {
+  const difficulties = ['easy', 'normal', 'hard'];
+  const index = readlineSync.keyInSelect(difficulties, chalk.hex('#71B0E8')('Выбери сложность:'), { cancel: false });
+  return difficulties[index];
+};
+
 const greetingOnePlayer = () => {
   const playerOne = {};
   playerOne.name = readlineSync.question(chalk.hex('#71B0E8')('Могу я узнать как вас зовут? '));
+  playerOne.difficulty = askDifficulty();
   console.log(chalk.hex('#71B0E8')(`Привет, ${playerOne.name}, давай выберем тебе аватар:`));
   playerOne.avatar = selectAvatar();
   return playerOne;
@@ -37,6 +44,5 @@ export default () => {
       console.log(chalk.hex('#FF4F5A')('Ошибка: Выберите режим игры (Введите A или B)'));
     }
   }
-  console.log(gameConf);
   return gameConf;
 };
