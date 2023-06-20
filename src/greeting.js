@@ -11,7 +11,6 @@ const askDifficulty = () => {
 const greetingOnePlayer = () => {
   const playerOne = {};
   playerOne.name = readlineSync.question(chalk.hex('#71B0E8')('Могу я узнать как вас зовут? '));
-  playerOne.difficulty = askDifficulty();
   console.log(chalk.hex('#71B0E8')(`Привет, ${playerOne.name}, давай выберем тебе аватар:`));
   playerOne.avatar = selectAvatar();
   return playerOne;
@@ -35,6 +34,7 @@ export default () => {
     gameConf.mode = readlineSync.question(chalk.hex('#71B0E8')('Введите букву (A или B) ')).toLocaleUpperCase();
     if (gameConf.mode === 'A') {
       gameConf.playerOne = greetingOnePlayer();
+      gameConf.playerOne.difficulty = askDifficulty();
       break;
     } else if (gameConf.mode === 'B') {
       gameConf.playerOne = greetingOnePlayer();
