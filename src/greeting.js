@@ -28,6 +28,26 @@ const greetingTwoPlayers = () => {
   return playerTwo;
 };
 
+const getRoundCount = () => {
+  let roundCount;
+
+  while (!Number.isInteger(Number(roundCount))
+   || !(Number(roundCount) > 0)
+   || !(Number(roundCount) <= 10)) {
+    roundCount = readlineSync.question(chalk.hex('#71B0E8')('Сколько раундов играем? '));
+
+    if (Number.isInteger(Number(roundCount))
+     && Number(roundCount) > 0
+     && Number(roundCount) <= 10) {
+      break;
+    } else {
+      console.log('Число раудов должно быть целым положительным числом от 1 до 10');
+    }
+  }
+
+  return roundCount;
+};
+
 export default () => {
   console.log(chalk.hex('#71B0E8')('Добро пожаловать в игру крестики нолики. Выбери режим игры A или B.'));
   console.log(chalk.hex('#B6E1FA')('A - Одиночная игры. \nB - Игра на двоих.'));
@@ -39,10 +59,12 @@ export default () => {
     if (gameConf.mode === 'A') {
       gameConf.playerOne = greetingOnePlayer();
       gameConf.playerOne.difficulty = askDifficulty();
+      gameConf.roundCount = getRoundCount();
       break;
     } else if (gameConf.mode === 'B') {
       gameConf.playerOne = greetingOnePlayer();
       gameConf.playerTwo = greetingTwoPlayers();
+      gameConf.roundCount = getRoundCount();
       break;
     } else {
       console.log(chalk.hex('#FF4F5A')('Ошибка: Выберите режим игры (Введите A или B)'));
