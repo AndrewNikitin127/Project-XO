@@ -60,7 +60,7 @@ const avatars = [whiteCat, cyanBrightOwl, redCat, greenCow, yellowMouse, purpleM
 
 const selectAvatar = () => {
   const avatarIndex = readlineSync.keyInSelect(avatars, chalk.hex('#EFC09D')('Выбери аватарку:'));
-  return `\n ${avatars[avatarIndex]}`;
+  return `${avatars[avatarIndex]}`;
 };
 
 export default selectAvatar;

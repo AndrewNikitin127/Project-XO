@@ -8,11 +8,14 @@ const askDifficulty = () => {
   return difficulties[index];
 };
 
+const removeAvatarName = (avatar) => (avatar === 'undefined' ? '' : avatar.substring(avatar.indexOf('\n') + 1));
+
 const greetingOnePlayer = () => {
   const playerOne = {};
   playerOne.name = readlineSync.question(chalk.hex('#71B0E8')('Могу я узнать как вас зовут? '));
   console.log(chalk.hex('#71B0E8')(`Привет, ${playerOne.name}, давай выберем тебе аватар:`));
-  playerOne.avatar = selectAvatar();
+  const avatarOne = selectAvatar();
+  playerOne.avatar = removeAvatarName(avatarOne);
   return playerOne;
 };
 
@@ -20,7 +23,8 @@ const greetingTwoPlayers = () => {
   const playerTwo = {};
   playerTwo.name = readlineSync.question(chalk.hex('#71B0E8')('Как зовут второго игрока? '));
   console.log(chalk.hex('#71B0E8')(`Привет, '${playerTwo.name}, давай выберем тебе аватар:`));
-  playerTwo.avatar = selectAvatar();
+  const avatarTwo = selectAvatar();
+  playerTwo.avatar = removeAvatarName(avatarTwo);
   return playerTwo;
 };
 
