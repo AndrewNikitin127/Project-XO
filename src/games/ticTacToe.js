@@ -5,6 +5,23 @@ import {
   viewComputerWaiting, getStupidComputerAiMove,
 } from './ticTacToe_tools.js';
 
+// не уверен, что счет должен вестись здесь
+const gameScore = [0, 0];
+
+const printScoreboard = (score, playerName) => {
+  let humanScore;
+
+  if (score[0] > score[1]) {
+    humanScore = chalk.green(`${playerName} ${score[0]}`);
+  } else if (score[0] < score[1]) {
+    humanScore = chalk.red(`${playerName} ${score[0]}`);
+  } else {
+    humanScore = chalk.yellow(`${playerName} ${score[0]}`);
+  }
+
+  console.log(`\nСчет игры\n${humanScore} : ${score[1]} Компьютер`);
+};
+
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
   if (winner === charPlayer1) {
     console.log(chalk.hex('#A1FFA3')(`    ${playerOneName}\n${playerOneAvatar}\nПоздравляем с победой!!!`));
@@ -33,7 +50,7 @@ const computerMove = {
   hard: getComputerAiMove,
 };
 
-export default (gameConf) => {
+export default (gameConf, currentRound) => {
   const emptyCell = '   ';
   const board = [
     [emptyCell, emptyCell, emptyCell],
@@ -59,24 +76,40 @@ export default (gameConf) => {
   let winner = emptyCell;
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
+    console.log(`Текущий раунд: ${currentRound + 1}`);
+    printScoreboard(gameScore, name);
     printBoard(board);
     viewComputerWaiting(charComputer, colorX);
     const [x, y] = move.first(board, emptyCell, charPlayer1, charComputer);
     board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
+    if (winner === charPlayer1) {
+      gameScore[0] += 1;
+    } else if (winner === charComputer) {
+      gameScore[1] += 1;
+    }
 
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    viewComputerWaiting(charComputer, colorY);
+    console.log(`Текущий раунд: ${currentRound + 1}`);
+    printScoreboard(gameScore, name);
     printBoard(board);
+    viewComputerWaiting(charComputer, colorY);
     const [a, z] = move.second(board, emptyCell, charPlayer1, charComputer);
     board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
+    if (winner === charPlayer1) {
+      gameScore[0] += 1;
+    } else if (winner === charComputer) {
+      gameScore[1] += 1;
+    }
 
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
+  console.log(`Текущий раунд: ${currentRound + 1}`);
+  printScoreboard(gameScore, name);
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer, name, avatar);
 };
