@@ -51,8 +51,8 @@ export default (gameConf) => {
     ? getPlayerMove : computerMove[difficulty]);
 
   const move = {
-    first: getMove(colorX, charPlayer1),
-    second: getMove(colorY, charPlayer1),
+    first: getMove(colorX),
+    second: getMove(colorY),
   };
 
   let winner = emptyCell;
