@@ -33,7 +33,7 @@ const computerMove = {
   hard: getComputerAiMove,
 };
 
-export default (gameConf) => {
+export default (gameConf, currentRound) => {
   const emptyCell = '   ';
   const board = [
     [emptyCell, emptyCell, emptyCell],
@@ -59,6 +59,7 @@ export default (gameConf) => {
   let winner = emptyCell;
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printBoard(board);
     viewComputerWaiting(charComputer, colorX);
     const [x, y] = move.first(board, emptyCell, charPlayer1, charComputer);
@@ -68,8 +69,9 @@ export default (gameConf) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    viewComputerWaiting(charComputer, colorY);
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printBoard(board);
+    viewComputerWaiting(charComputer, colorY);
     const [a, z] = move.second(board, emptyCell, charPlayer1, charComputer);
     board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
@@ -77,6 +79,7 @@ export default (gameConf) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
+  console.log(`Текущий раунд: ${currentRound + 1}`);
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer, name, avatar);
 };

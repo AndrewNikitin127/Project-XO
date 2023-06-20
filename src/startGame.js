@@ -10,7 +10,7 @@ export default () => {
     if (gameConf.mode === 'B') {
       ticTacToePvP(gameConf);
     } else {
-      ticTacToe(gameConf);
+      ticTacToe(gameConf, currentRound);
     }
   }
 };
