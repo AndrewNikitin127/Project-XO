@@ -2,9 +2,9 @@ import chalk from 'chalk';
 import { getRandomInt, askQuestionRange, pause } from '../tools.js';
 import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
 
-const printWinner = (winner, charPlayer1, charComputer) => {
+const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')('вы победили'));
+    console.log(chalk.hex('#A1FFA3')(`    ${playerOneName}\n${playerOneAvatar}\nПоздравляем с победой!!!`));
   } else if (winner === charComputer) {
     console.log(chalk.hex('#FF4F5A')('вы проиграли'));
   } else {
@@ -39,7 +39,9 @@ const getComputerMove = (board, emptyCell) => {
 const getMove = (color, charPlayer1) => (charPlayer1 === color
   ? getPlayerMove : getComputerMove);
 
-export default () => {
+export default (gameConf) => {
+  const playerOneName = gameConf.playerOne.name;
+  const playerOneAvatar = gameConf.playerOne.avatar;
   const emptyCell = '   ';
   const board = [
     [emptyCell, emptyCell, emptyCell],
@@ -76,5 +78,5 @@ export default () => {
   }
   console.clear();
   printBoard(board);
-  printWinner(winner, charPlayer1, charComputer);
+  printWinner(winner, charPlayer1, charComputer, playerOneName, playerOneAvatar);
 };
