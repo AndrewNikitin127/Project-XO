@@ -38,7 +38,7 @@ const getPlayerMove2 = (board, emptyCell, playerTwoName) => {
   return [a, z];
 };
 
-export default (gameConf) => {
+export default (gameConf, currentRound) => {
   const playerOneName = gameConf.playerOne.name;
   const playerTwoName = gameConf.playerTwo.name;
   const emptyCell = '   ';
@@ -64,17 +64,26 @@ export default (gameConf) => {
   let winner = emptyCell;
 
   while (gameCanContinue(winner, board, emptyCell)) {
+    
+    console.clear();
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printBoard(board);
     const [x, y] = move.first(board, emptyCell, playerOneName);
     board[x][y] = charPlayer1;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
+    
+    console.clear();
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printBoard(board);
     const [a, z] = move.second(board, emptyCell, playerTwoName);
     board[a][z] = charPlayer2;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
+  
+  console.clear();
+  console.log(`Текущий раунд: ${currentRound + 1}`);
   printBoard(board);
   printWinner(winner, charPlayer1, charPlayer2, gameConf);
 };

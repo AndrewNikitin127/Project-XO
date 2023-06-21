@@ -4,11 +4,11 @@ import greeting from './greeting.js';
 
 export default () => {
   const gameConf = greeting();
-  console.log(gameConf.mode);
+  // console.log(gameConf.mode);
 
   for (let currentRound = 0; currentRound < gameConf.roundCount; currentRound += 1) {
     if (gameConf.mode === 'B') {
-      ticTacToePvP(gameConf);
+      ticTacToePvP(gameConf, currentRound);
     } else {
       ticTacToe(gameConf, currentRound);
     }
