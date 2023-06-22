@@ -24,6 +24,7 @@
   "homepage": "https://github.com/AndrewNikitin127/project-XO#readme",
   "dependencies": {
     "chalk": "^5.2.0",
+    "chalk-animation": "^2.0.3",
     "commander": "^10.0.1",
     "lodash": "^4.17.21",
     "readline-sync": "^1.4.10"
