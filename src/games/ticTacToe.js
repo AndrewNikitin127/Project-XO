@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import { askQuestionRange, getRandomInt } from '../tools.js';
+import gradient from 'gradient-string';
+import { askQuestionRange, getRandomInt, pause } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
   viewComputerWaiting, getStupidComputerAiMove,
@@ -8,7 +9,9 @@ import {
 // не уверен, что счет должен вестись здесь
 const gameScore = [0, 0];
 
-const printScoreboard = (score, playerName) => {
+const printScoreboard = (score, name) => {
+  const playerName = (name === '') ? 'Человек' : name;
+
   let humanScore;
   let computerScore;
 
@@ -29,8 +32,10 @@ ${humanScore} ${chalk.hex('#B6E1FA')(':')} ${computerScore}`);
 };
 
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
+  const userName = (playerOneName === '') ? '' : `${playerOneName}, `;
+
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')(`${playerOneName} выигрывает раунд!\n${playerOneAvatar}`));
+    console.log(chalk.hex('#A1FFA3')(`${userName}вы выиграли раунд!\n${playerOneAvatar}`));
   } else if (winner === charComputer) {
     console.log(chalk.hex('#FF4F5A')('вы проиграли раунд\n'));
   } else {
@@ -118,4 +123,20 @@ export default (gameConf, currentRound) => {
   printScoreboard(gameScore, name);
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer, name, avatar);
+
+  if (currentRound === gameConf.roundCount - 1) {
+    pause(3000);
+    console.clear();
+    console.log(chalk.hex('#71B0E8')('Игра закончена!'));
+    printScoreboard(gameScore, name);
+    pause(1000);
+    console.log();
+    if (gameScore[0] > gameScore[1]) {
+      const text = name === '' ? 'Вы победили!\n' : `${name}, Вы победили!\n`;
+      console.log(chalk.hex('#A1FFA3')(text));
+      console.log(avatar);
+      console.log(gradient.pastel('Поздравляем с победой!!!!\n\n\n'));
+      pause(2000);
+    }
+  }
 };
