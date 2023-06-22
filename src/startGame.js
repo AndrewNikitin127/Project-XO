@@ -1,16 +1,29 @@
 import ticTacToe from './games/ticTacToe.js';
 import ticTacToePvP from './games/ticTacToePvP.js';
 import greeting from './greeting.js';
+import getGameBreak from './getGameBreak.js';
 
 export default () => {
   const gameConf = greeting();
-  console.log(gameConf.mode);
+  // console.log(gameConf.mode);
 
   for (let currentRound = 0; currentRound < gameConf.roundCount; currentRound += 1) {
     if (gameConf.mode === 'B') {
-      ticTacToePvP(gameConf);
+      ticTacToePvP(gameConf, currentRound);
     } else {
       ticTacToe(gameConf, currentRound);
+    }
+
+    if (currentRound < gameConf.roundCount - 1) {
+      const breakBetweenRounds = getGameBreak();
+      if (breakBetweenRounds === 'exit') {
+        console.log('Игра завершена досрочно');
+        return;
+      }
+    } else if (gameConf.mode === 'B') {
+      console.log('сообщение для режима PvP');
+    } else {
+      console.log('сообщение для режима PvC');
     }
   }
 };
