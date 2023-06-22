@@ -11,11 +11,11 @@ async function clearConsole() {
 async function welcome() {
   const gameTitleAnimation = chalkAnimation.karaoke(`
 
-#   # ####  #####  #### ##### #   # #   # #   #           #   #  ###   #### #   # #   # #   # 
-#  #  #   # #     #       #   #  ## #  #  #  ##           #   # #   #  #  # #  ## #  #  #  ## 
-###   ####  ####  #       #   # # # ###   # # #    ###    ##### #   #  #  # # # # ###   # # # 
-#  #  #     #     #       #   ##  # #  #  ##  #           #   # #   #  #  # ##  # #  #  ##  # 
-#   # #     #####  ####   #   #   # #   # #   #           #   #  ###  #   # #   # #   # #   # 
+  #   # ####  #####  #### ##### #   # #   # #   #           #   #  ###   #### #   # #   # #   #
+  #  #  #   # #     #       #   #  ## #  #  #  ##           #   # #   #  #  # #  ## #  #  #  ##
+  ###   ####  ####  #       #   # # # ###   # # #    ###    ##### #   #  #  # # # # ###   # # #
+  #  #  #     #     #       #   ##  # #  #  ##  #           #   # #   #  #  # ##  # #  #  ##  #
+  #   # #     #####  ####   #   #   # #   # #   #           #   #  ###  #   # #   # #   # #   #
 
 `, 2);
 
@@ -23,7 +23,7 @@ async function welcome() {
   gameTitleAnimation.stop();
 }
 
-await clearConsole();
-await welcome();
-
-export default welcome;
+export default async () => {
+  await clearConsole();
+  await welcome();
+};

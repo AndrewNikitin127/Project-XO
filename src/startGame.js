@@ -4,8 +4,8 @@ import greeting from './greeting.js';
 import getGameBreak from './getGameBreak.js';
 import showWelcomeAnimation from './welcomeAnimation.js';
 
-export default () => {
-  showWelcomeAnimation();
+export default async () => {
+  await showWelcomeAnimation();
 
   const gameConf = greeting();
   // console.log(gameConf.mode);
