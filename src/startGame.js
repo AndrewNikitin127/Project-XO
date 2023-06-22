@@ -2,8 +2,11 @@ import ticTacToe from './games/ticTacToe.js';
 import ticTacToePvP from './games/ticTacToePvP.js';
 import greeting from './greeting.js';
 import getGameBreak from './getGameBreak.js';
+import showWelcomeAnimation from './welcomeAnimation.js';
 
-export default () => {
+export default async () => {
+  await showWelcomeAnimation();
+
   const gameConf = greeting();
   // console.log(gameConf.mode);
 
