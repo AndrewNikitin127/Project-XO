@@ -19,7 +19,7 @@ const printScoreboard = (score, playerName) => {
     humanScore = chalk.yellow(`${playerName} ${score[0]}`);
   }
 
-  console.log(`\nСчет игры\n${humanScore} : ${score[1]} Компьютер`);
+  console.log(chalk.hex('#FFFEC9')(`\nСчет игры\n${humanScore} : ${score[1]} Компьютер`));
 };
 
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
@@ -76,7 +76,7 @@ export default (gameConf, currentRound) => {
   let winner = emptyCell;
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
     printScoreboard(gameScore, name);
     printBoard(board);
     viewComputerWaiting(charComputer, colorX);
@@ -92,7 +92,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
     printScoreboard(gameScore, name);
     printBoard(board);
     viewComputerWaiting(charComputer, colorY);
@@ -108,7 +108,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
-  console.log(`Текущий раунд: ${currentRound + 1}`);
+  console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
   printScoreboard(gameScore, name);
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer, name, avatar);

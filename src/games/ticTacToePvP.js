@@ -19,7 +19,7 @@ const printScoreboard = (score, playerOneName, playerTwoName) => {
     playerTwoScore = chalk.yellow(`${score[1]} ${playerTwoName}`);
   }
 
-  console.log(`\nСчет игры\n${playerOneScore} : ${playerTwoScore}`);
+  console.log(chalk.hex('#FFFEC9')(`\nСчет игры\n${playerOneScore} : ${playerTwoScore}`));
 };
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
@@ -36,7 +36,7 @@ const getPlayerMove1 = (board, emptyCell, playerOneName) => {
   let x;
   let y;
   do {
-    console.log(chalk.hex('#71B0E8')(`ход игрока ${playerOneName}`));
+    console.log(chalk.hex('#EFC09D')(`ход игрока ${playerOneName}`));
     x = askQuestionRange(chalk.blue('ведите номер строки #(1-3): '), 1, 3) - 1;
     y = askQuestionRange(chalk.blue('ведите номер ячейки #(1-3): '), 1, 3) - 1;
 
@@ -85,7 +85,7 @@ export default (gameConf, currentRound) => {
 
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [x, y] = move.first(board, emptyCell, playerOneName);
@@ -99,7 +99,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [a, z] = move.second(board, emptyCell, playerTwoName);
@@ -114,7 +114,7 @@ export default (gameConf, currentRound) => {
   }
 
   console.clear();
-  console.log(`Текущий раунд: ${currentRound + 1}`);
+  console.log(chalk.hex('#EFC09D')(`Текущий раунд: ${currentRound + 1}`));
   printScoreboard(gameScore, playerOneName, playerTwoName);
   printBoard(board);
   printWinner(winner, charPlayer1, charPlayer2, gameConf);

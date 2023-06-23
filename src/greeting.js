@@ -4,7 +4,7 @@ import selectAvatar from './avatars.js';
 
 const askDifficulty = () => {
   const difficulties = ['easy', 'normal', 'hard'];
-  const index = readlineSync.keyInSelect(difficulties, chalk.hex('#71B0E8')('Выбери сложность:'), { cancel: false });
+  const index = readlineSync.keyInSelect(difficulties, chalk.hex('#EFC09D')('Выбери сложность:'), { cancel: false });
   return difficulties[index];
 };
 
@@ -32,16 +32,16 @@ const getRoundCount = () => {
   let roundCount;
 
   while (!Number.isInteger(Number(roundCount))
-   || !(Number(roundCount) > 0)
-   || !(Number(roundCount) <= 10)) {
-    roundCount = readlineSync.question(chalk.hex('#71B0E8')('Сколько раундов играем? '));
+    || !(Number(roundCount) > 0)
+    || !(Number(roundCount) <= 10)) {
+    roundCount = readlineSync.question(chalk.hex('#EFC09D')('Сколько раундов играем? '));
 
     if (Number.isInteger(Number(roundCount))
-     && Number(roundCount) > 0
-     && Number(roundCount) <= 10) {
+      && Number(roundCount) > 0
+      && Number(roundCount) <= 10) {
       break;
     } else {
-      console.log('Число раундов должно быть целым положительным числом от 1 до 10');
+      console.log(chalk.hex('#FF4F5A')('Число раундов должно быть целым положительным числом от 1 до 10'));
     }
   }
 

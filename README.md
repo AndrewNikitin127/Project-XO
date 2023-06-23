@@ -10,6 +10,14 @@ make install
 
 playgame
 
+## PvC mode
+
+[![asciicast](https://asciinema.org/a/2DmJfWa3PPv3m53oimjTdQE9F.svg)](https://asciinema.org/a/2DmJfWa3PPv3m53oimjTdQE9F)
+
+## PvP mode
+
+[![asciicast](https://asciinema.org/a/071xf4RioRV6Xc79qqVanK3sN.svg)](https://asciinema.org/a/071xf4RioRV6Xc79qqVanK3sN)
+
 ## Run tests
 
 make test

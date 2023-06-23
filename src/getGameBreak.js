@@ -6,13 +6,13 @@ const getGameBreak = () => {
   // console.log(action);
 
   while (action !== '' && action !== 'exit') {
-    action = readlineSync.question('Нажмите Enter, чтобы играть следующий раунд ').toLowerCase();
+    action = readlineSync.question(chalk.hex('#B6E1FA')('Нажмите Enter, чтобы играть следующий раунд. Введите exit чтобы выйти ')).toLowerCase();
     // console.log(action);
 
     if (action === '' || action === 'exit') {
       break;
     } else {
-      console.log(chalk.hex('#FF4F5A')('Нажмите Enter, чтобы играть следующий раунд. Введите exit чтобы выйти'));
+      console.log(chalk.hex('#B6E1FA')('Нажмите Enter, чтобы играть следующий раунд. Введите exit чтобы выйти '));
     }
   }
 

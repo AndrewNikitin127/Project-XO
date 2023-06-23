@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import ticTacToe from './games/ticTacToe.js';
 import ticTacToePvP from './games/ticTacToePvP.js';
 import greeting from './greeting.js';
@@ -20,7 +21,7 @@ export default async () => {
     if (currentRound < gameConf.roundCount - 1) {
       const breakBetweenRounds = getGameBreak();
       if (breakBetweenRounds === 'exit') {
-        console.log('Игра завершена досрочно');
+        console.log(chalk.hex('#cc7ddf')('Игра завершена досрочно'));
         return;
       }
     } else if (gameConf.mode === 'B') {
