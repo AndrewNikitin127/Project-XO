@@ -12,11 +12,11 @@ playgame
 
 ## PvC mode
 
-[![asciicast](https://asciinema.org/a/2DmJfWa3PPv3m53oimjTdQE9F.svg)](https://asciinema.org/a/2DmJfWa3PPv3m53oimjTdQE9F)
+[![asciicast](https://asciinema.org/a/a63Ad33VE6fLEq2lTj8PA5Zln.svg)](https://asciinema.org/a/a63Ad33VE6fLEq2lTj8PA5Zln)
 
 ## PvP mode
 
-[![asciicast](https://asciinema.org/a/071xf4RioRV6Xc79qqVanK3sN.svg)](https://asciinema.org/a/071xf4RioRV6Xc79qqVanK3sN)
+[![asciicast](https://asciinema.org/a/JQ7BAX40ZPSfQvg4rm7bw0Ihs.svg)](https://asciinema.org/a/JQ7BAX40ZPSfQvg4rm7bw0Ihs)
 
 ## Run tests
 

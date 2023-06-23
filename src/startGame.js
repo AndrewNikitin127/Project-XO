@@ -21,7 +21,7 @@ export default async () => {
     if (currentRound < gameConf.roundCount - 1) {
       const breakBetweenRounds = getGameBreak();
       if (breakBetweenRounds === 'exit') {
-        console.log(chalk.hex('#cc7ddf')('Игра завершена досрочно'));
+        console.log(chalk.hex('#CC7DDF')('Игра завершена досрочно'));
         return;
       }
     } else if (gameConf.mode === 'B') {
