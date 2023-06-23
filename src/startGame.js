@@ -27,7 +27,7 @@ export default async () => {
     } else if (gameConf.mode === 'B') {
       console.log('сообщение для режима PvP');
     } else {
-      console.log('сообщение для режима PvC');
+      // console.log('сообщение для режима PvC');
     }
   }
 };
