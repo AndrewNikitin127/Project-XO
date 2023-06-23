@@ -15,20 +15,22 @@ const printScoreboard = (score, playerOneName, playerTwoName) => {
     playerOneScore = chalk.red(`${playerOneName} ${score[0]}`);
     playerTwoScore = chalk.green(`${score[1]} ${playerTwoName}`);
   } else {
-    playerOneScore = chalk.yellow(`${playerOneName} ${score[0]}`);
-    playerTwoScore = chalk.yellow(`${score[1]} ${playerTwoName}`);
+    playerOneScore = chalk.hex('#B6E1FA')(`${playerOneName} ${score[0]}`);
+    playerTwoScore = chalk.hex('#B6E1FA')(`${score[1]} ${playerTwoName}`);
   }
 
-  console.log(`\nСчет игры\n${playerOneScore} : ${playerTwoScore}`);
+  console.log(`
+${chalk.hex('#71B0E8')('Счет игры')}
+${playerOneScore} ${chalk.hex('#B6E1FA')(':')} ${playerTwoScore}`);
 };
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name}\n${gameConf.playerOne.avatar}\nПоздравляем с победой!!! `));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name} выигрывает раунд!\n${gameConf.playerOne.avatar}`));
   } else if (winner === charPlayer2) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name}\n${gameConf.playerTwo.avatar}\nПоздравляем с победой!!!`));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} выигрывает раунд!\n${gameConf.playerTwo.avatar}`));
   } else {
-    console.log(chalk.hex('#71B0E8')('ничья'));
+    console.log(chalk.hex('#71B0E8')('раунд закончился ничьей\n'));
   }
 }
 
@@ -85,7 +87,7 @@ export default (gameConf, currentRound) => {
 
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [x, y] = move.first(board, emptyCell, playerOneName);
@@ -99,7 +101,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [a, z] = move.second(board, emptyCell, playerTwoName);
@@ -114,7 +116,7 @@ export default (gameConf, currentRound) => {
   }
 
   console.clear();
-  console.log(`Текущий раунд: ${currentRound + 1}`);
+  console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
   printScoreboard(gameScore, playerOneName, playerTwoName);
   printBoard(board);
   printWinner(winner, charPlayer1, charPlayer2, gameConf);
