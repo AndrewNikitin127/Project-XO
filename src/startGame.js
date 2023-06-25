@@ -25,7 +25,7 @@ export default async () => {
         return;
       }
     } else if (gameConf.mode === 'B') {
-      console.log(chalk.hex('#A1FFA3')('Благодарим за увлекательную игру!\nНадеемся встретиться с вами снова!\n'));
+      console.log(chalk.hex('#A1FFA3')('Благодарим за весёлую игру!\nНадеемся встретиться с вами снова!\n'));
     } else {
       // console.log('сообщение для режима PvC');
     }

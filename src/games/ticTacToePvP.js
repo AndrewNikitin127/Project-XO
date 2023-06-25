@@ -28,7 +28,7 @@ function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
   if (winner === charPlayer1) {
     console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name}, вам слишком легко далась победа!\n${gameConf.playerOne.avatar}`));
   } else if (winner === charPlayer2) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} был настолько хорош, что ему даже не понадобилось напрягаться!\n${gameConf.playerTwo.avatar}`));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} был настолько хорош, что ему даже не пришлось напрягаться!\n${gameConf.playerTwo.avatar}`));
   } else {
     console.log(chalk.hex('#71B0E8')('Поменяйтесь местами, может, кто-то из вас выиграет в следующий раз\n'));
   }
