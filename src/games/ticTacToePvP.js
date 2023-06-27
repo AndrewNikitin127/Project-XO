@@ -26,11 +26,11 @@ ${playerOneScore} ${chalk.hex('#B6E1FA')(':')} ${playerTwoScore}`);
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name} выигрывает раунд!\n${gameConf.playerOne.avatar}`));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name}, вам слишком легко далась победа!\n${gameConf.playerOne.avatar}`));
   } else if (winner === charPlayer2) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} выигрывает раунд!\n${gameConf.playerTwo.avatar}`));
+    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} был настолько хорош, что ему даже не пришлось напрягаться!\n${gameConf.playerTwo.avatar}`));
   } else {
-    console.log(chalk.hex('#71B0E8')('раунд закончился ничьей\n'));
+    console.log(chalk.hex('#71B0E8')('Поменяйтесь местами, может, кто-то из вас выиграет в следующий раз\n'));
   }
 }
 
@@ -38,7 +38,7 @@ const getPlayerMove1 = (board, emptyCell, playerOneName) => {
   let x;
   let y;
   do {
-    console.log(chalk.hex('#71B0E8')(`ход игрока ${playerOneName}`));
+    console.log(chalk.hex('#EFC09D')(`ход игрока ${playerOneName}`));
     x = askQuestionRange(chalk.blue('ведите номер строки #(1-3): '), 1, 3) - 1;
     y = askQuestionRange(chalk.blue('ведите номер ячейки #(1-3): '), 1, 3) - 1;
 
@@ -87,7 +87,7 @@ export default (gameConf, currentRound) => {
 
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [x, y] = move.first(board, emptyCell, playerOneName);
@@ -101,7 +101,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+    console.log(`Текущий раунд: ${currentRound + 1}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [a, z] = move.second(board, emptyCell, playerTwoName);
@@ -116,7 +116,7 @@ export default (gameConf, currentRound) => {
   }
 
   console.clear();
-  console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+  console.log(`Текущий раунд: ${currentRound + 1}`);
   printScoreboard(gameScore, playerOneName, playerTwoName);
   printBoard(board);
   printWinner(winner, charPlayer1, charPlayer2, gameConf);
