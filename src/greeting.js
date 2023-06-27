@@ -1,74 +1,42 @@
-import readlineSync from 'readline-sync';
-import chalk from 'chalk';
 import selectAvatar from './avatars.js';
+import {
+  askQuestion, askAnswerIndex, printText, getColorArray, getColor, askQuestionRange,
+} from './tools.js';
 
 const askDifficulty = () => {
   const difficulties = ['easy', 'normal', 'hard'];
-  const index = readlineSync.keyInSelect(difficulties, chalk.hex('#EFC09D')('Выбери сложность:'), { cancel: false });
+  const difficultiesColor = getColorArray(difficulties, '#B6E1FA');
+  const index = askAnswerIndex(difficultiesColor, 'Выбери сложность:', '#EFC09D', false);
   return difficulties[index];
 };
 
-const removeAvatarName = (avatar) => (avatar === 'undefined' ? '' : avatar.substring(avatar.indexOf('\n') + 1));
-
-const greetingOnePlayer = () => {
-  const playerOne = {};
-  playerOne.name = readlineSync.question(chalk.hex('#71B0E8')('Могу я узнать как вас зовут? '));
-  console.log(chalk.hex('#71B0E8')(`Привет, ${playerOne.name}, давай выберем тебе аватар:`));
-  const avatarOne = selectAvatar();
-  playerOne.avatar = removeAvatarName(avatarOne);
-  return playerOne;
-};
-
-const greetingTwoPlayers = () => {
-  const playerTwo = {};
-  playerTwo.name = readlineSync.question(chalk.hex('#71B0E8')('Как зовут второго игрока? '));
-  console.log(chalk.hex('#71B0E8')(`Привет, '${playerTwo.name}, давай выберем тебе аватар:`));
-  const avatarTwo = selectAvatar();
-  playerTwo.avatar = removeAvatarName(avatarTwo);
-  return playerTwo;
+const greetingPlayer = (questionAboutName, textColor = '#71B0E8') => {
+  const player = {};
+  player.name = askQuestion(questionAboutName, textColor);
+  printText(`Привет, ${player.name}, давай выберем тебе аватар:`, textColor);
+  player.avatar = selectAvatar();
+  return player;
 };
 
 const getRoundCount = () => {
-  let roundCount;
-
-  while (!Number.isInteger(Number(roundCount))
-    || !(Number(roundCount) > 0)
-    || !(Number(roundCount) <= 10)) {
-    roundCount = readlineSync.question(chalk.hex('#EFC09D')('Сколько раундов играем? '));
-
-    if (Number.isInteger(Number(roundCount))
-      && Number(roundCount) > 0
-      && Number(roundCount) <= 10) {
-      break;
-    } else {
-      console.log(chalk.hex('#FF4F5A')('Число раундов должно быть целым положительным числом от 1 до 10'));
-    }
-  }
-
-  return roundCount;
+  const question = getColor('Сколько раундов играем? ', '#EFC09D');
+  const errorMessage = getColor('Число раундов должно быть целым положительным числом от 1 до 10 ', '#FF4F5A');
+  const raunds = askQuestionRange(question, 1, 10, errorMessage);
+  return raunds;
 };
 
 export default () => {
-  console.log(chalk.hex('#71B0E8')('Добро пожаловать в игру крестики нолики. Выбери режим игры A или B.'));
-  console.log(chalk.hex('#B6E1FA')('A - Одиночная игры. \nB - Игра на двоих.'));
+  printText('Добро пожаловать в игру крестики нолики. ', '#71B0E8');
 
-  const gameConf = { playerOne: null, playerTwo: null, mode: null };
+  const modes = getColorArray(['Одиночная игра.', 'Игра на двоих.'], '#B6E1FA');
+  const modeIndex = askAnswerIndex(modes, 'Выбери режим игры', '#71B0E8', false);
+  const gameConf = { playerOne: null, playerTwo: null, mode: modeIndex === 0 ? 'A' : 'B' };
 
-  while (gameConf.mode !== 'A' && gameConf.mode !== 'B') {
-    gameConf.mode = readlineSync.question(chalk.hex('#71B0E8')('Введите букву (A или B) ')).toLocaleUpperCase();
-    if (gameConf.mode === 'A') {
-      gameConf.playerOne = greetingOnePlayer();
-      gameConf.playerOne.difficulty = askDifficulty();
-      gameConf.roundCount = getRoundCount();
-      break;
-    } else if (gameConf.mode === 'B') {
-      gameConf.playerOne = greetingOnePlayer();
-      gameConf.playerTwo = greetingTwoPlayers();
-      gameConf.roundCount = getRoundCount();
-      break;
-    } else {
-      console.log(chalk.hex('#FF4F5A')('Ошибка: Выберите режим игры (Введите A или B)'));
-    }
-  }
+  gameConf.playerOne = greetingPlayer('Могу я узнать как вас зовут?');
+
+  if (gameConf.mode === 'A') gameConf.playerOne.difficulty = askDifficulty();
+  else gameConf.playerTwo = greetingPlayer('Как зовут второго игрока?');
+
+  gameConf.roundCount = getRoundCount();
   return gameConf;
 };

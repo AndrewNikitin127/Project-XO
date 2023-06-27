@@ -1,5 +1,5 @@
-import readlineSync from 'readline-sync';
 import chalk from 'chalk';
+import { askAnswerIndex } from './tools.js';
 
 const cat = `Котозаяц с баяном
   (\\___/)
@@ -59,8 +59,10 @@ const pinkSomebody = chalk.magentaBright.bold(somebody);
 const avatars = [whiteCat, cyanBrightOwl, redCat, greenCow, yellowMouse, purpleMoose, pinkSomebody];
 
 const selectAvatar = () => {
-  const avatarIndex = readlineSync.keyInSelect(avatars, chalk.hex('#EFC09D')('Выбери аватарку:'));
-  return `${avatars[avatarIndex]}`;
+  const avatarIndex = askAnswerIndex(avatars, 'Выбери аватарку:', '#EFC09D');
+  if (avatarIndex === -1) return '';
+  const avatar = avatars[avatarIndex];
+  return avatar.substring(avatar.indexOf('\n') + 1);
 };
 
 export default selectAvatar;

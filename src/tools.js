@@ -1,21 +1,32 @@
 import readlineSync from 'readline-sync';
 import chalk from 'chalk';
 
-// тут храним и экспортируем
-// самописные функции, и константы, которые используем больше чем в одном файле
-
-/**
- * @param {num} min @param {num} max @returns {num} random number */
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-/**
- * displays the text and asks you to enter a number in the range
- * @param {string} question @param {int} begin @param {int} end
- * @returns {int} number from the user */
-const askQuestionRange = (question, begin, end) => +readlineSync.question(question, {
-  limit: new RegExp(`^[${begin}-${end}]$`),
-  limitMessage: chalk.hex('#DA104C')('Извините, $<lastInput> не подходит.'),
-});
+const getColor = (text, color) => chalk.hex(color)(text);
+const getColorArray = (arr, color) => arr.map((e) => getColor(e, color));
+
+const askQuestionRange = (question, begin, end, errorMessage = '') => {
+  const defaultErrorMessage = getColor('Извините, $<lastInput> не подходит.', '#DA104C');
+  const messageErr = errorMessage === '' ? defaultErrorMessage : errorMessage;
+  const tempArr = [];
+  for (let i = begin; i <= end; i += 1) {
+    tempArr.push(i.toString());
+  }
+  const regExpValue = `^(${tempArr.join('|')})$`;
+  return +readlineSync.question(question, {
+    limit: new RegExp(regExpValue),
+    limitMessage: messageErr,
+  });
+};
+
+const printText = (text, textColor) => console.log(chalk.hex(textColor)(text));
+
+const askQuestion = (questionText, textColor) => (
+  readlineSync.question(chalk.hex(textColor)(`${questionText} `)));
+
+const askAnswerIndex = (variants, questionText, textColor, cancelVariant = true) => (
+  readlineSync.keyInSelect(variants, chalk.hex(textColor)(`${questionText} `), { cancel: cancelVariant }));
 
 // Функция добавляет паузу перед выполнением следующей
 // pause(2000) - пауза 2 секунды
@@ -27,4 +38,7 @@ const pause = (milliseconds) => {
   } while (currentDate - date < milliseconds);
 };
 
-export { getRandomInt, askQuestionRange, pause };
+export {
+  getRandomInt, askQuestionRange, pause, askQuestion, askAnswerIndex, printText, getColor,
+  getColorArray,
+};
