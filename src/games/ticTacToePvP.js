@@ -75,6 +75,9 @@ export default (gameConf, currentRound) => {
   const charPlayer1 = getRandomInt(0, 1) === 0 ? colorX : colorY;
   const charPlayer2 = charPlayer1 === colorX ? colorY : colorX;
 
+  const playerNameX = charPlayer1 === colorX ? playerOneName : playerTwoName;
+  const playerNameY = charPlayer1 === colorY ? playerOneName : playerTwoName;
+
   const getMove = (color) => (charPlayer1 === color
     ? getPlayerMove1 : getPlayerMove2);
 
@@ -90,8 +93,8 @@ export default (gameConf, currentRound) => {
     console.log(`Текущий раунд: ${currentRound + 1}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
-    const [x, y] = move.first(board, emptyCell, playerOneName);
-    board[x][y] = charPlayer1;
+    const [x, y] = move.first(board, emptyCell, playerNameX);
+    board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
     if (winner === charPlayer1) {
       gameScore[0] += 1;
@@ -104,8 +107,8 @@ export default (gameConf, currentRound) => {
     console.log(`Текущий раунд: ${currentRound + 1}`);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
-    const [a, z] = move.second(board, emptyCell, playerTwoName);
-    board[a][z] = charPlayer2;
+    const [a, z] = move.second(board, emptyCell, playerNameY);
+    board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
     if (winner === charPlayer1) {
       gameScore[0] += 1;
