@@ -38,6 +38,14 @@ const boardHasEmptyCell = (board, emptyCell) => {
   return freeSpaces > 0;
 };
 
+const checkDiagonal = (board, emptyCell, leftToRight) => {
+  const firstСorner = leftToRight === true ? board[0][0] : board[0][2];
+  const secondCorner = leftToRight === true ? board[2][2] : board[2][0];
+  const centr = board[1][1];
+
+  return firstСorner === centr && firstСorner === secondCorner && firstСorner !== emptyCell;
+};
+
 const checkWinner = (board, emptyCell) => {
   // check for rows
   for (let i = 0; i < 3; i += 1) {
@@ -50,10 +58,10 @@ const checkWinner = (board, emptyCell) => {
       return board[0][i];
     }
   } // check for diagonals
-  if (board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== emptyCell) {
+  if (checkDiagonal(board, emptyCell, true)) {
     return board[0][0];
   }
-  if (board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== emptyCell) {
+  if (checkDiagonal(board, emptyCell, false)) {
     return board[0][2];
   }
   return emptyCell;
