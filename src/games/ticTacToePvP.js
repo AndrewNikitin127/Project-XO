@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { askQuestionRange, getRandomInt } from '../tools.js';
+import { askQuestionRange, getRandomInt, printText } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, colorScore, printScore,
 } from './ticTacToe_tools.js';
@@ -15,12 +15,16 @@ const printScoreboard = (score, playerOneName, playerTwoName) => {
 };
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
+  const player1Win = `${gameConf.playerOne.name}, вам слишком легко далась победа!\n${gameConf.playerOne.avatar}`;
+  const player2Win = `${gameConf.playerTwo.name} был настолько хорош, что ему даже не пришлось напрягаться!\n${gameConf.playerTwo.avatar}`;
+  const draw = 'Поменяйтесь местами, может, кто-то из вас выиграет в следующий раз\n';
+
   if (winner === charPlayer1) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerOne.name}, вам слишком легко далась победа!\n${gameConf.playerOne.avatar}`));
+    printText(player1Win, '#A1FFA3');
   } else if (winner === charPlayer2) {
-    console.log(chalk.hex('#A1FFA3')(`${gameConf.playerTwo.name} был настолько хорош, что ему даже не пришлось напрягаться!\n${gameConf.playerTwo.avatar}`));
+    printText(player2Win, '#A1FFA3');
   } else {
-    console.log(chalk.hex('#71B0E8')('Поменяйтесь местами, может, кто-то из вас выиграет в следующий раз\n'));
+    printText(draw, '#71B0E8');
   }
 }
 
