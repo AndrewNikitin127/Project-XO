@@ -82,24 +82,29 @@ const checkRowsAndColumns = (board, i, emptyCell, rows = true) => {
 };
 
 const checkWinner = (board, emptyCell) => {
+  let result = emptyCell;
   // check for rows
   for (let i = 0; i < 3; i += 1) {
     if (checkRowsAndColumns(board, i, emptyCell, true)) {
-      return board[i][0];
+      const firstCell = board[i][0];
+      result = firstCell;
     }
   } // check for column
   for (let i = 0; i < 3; i += 1) {
     if (checkRowsAndColumns(board, i, emptyCell, false)) {
-      return board[0][i];
+      const firstCell = board[0][i];
+      result = firstCell;
     }
   } // check for diagonals
   if (checkDiagonal(board, emptyCell, true)) {
-    return board[0][0];
+    const firstCell = board[0][0];
+    result = firstCell;
   }
   if (checkDiagonal(board, emptyCell, false)) {
-    return board[0][2];
+    const firstCell = board[0][2];
+    result = firstCell;
   }
-  return emptyCell;
+  return result;
 };
 
 const gameCanContinue = (winner, board, emptyCell) => (
