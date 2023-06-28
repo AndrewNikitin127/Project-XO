@@ -4,6 +4,10 @@ import { getRandomInt, pause } from '../tools.js';
 
 // support functions
 
+const printCurrentRound = (currentRound) => (
+  console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`)
+);
+
 const printScore = (colorScorePlayer1, colorScorePlayer2) => {
   console.log(`
   ${chalk.hex('#71B0E8')('Счет игры')}
@@ -181,5 +185,5 @@ const getStupidComputerAiMove = (board, emptyCell, charPlayer1, charComputer) =>
 
 export {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
-  viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore,
+  viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore, printCurrentRound,
 };

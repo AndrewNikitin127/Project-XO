@@ -3,7 +3,7 @@ import gradient from 'gradient-string';
 import { askQuestionRange, getRandomInt, pause } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
-  viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore,
+  viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore, printCurrentRound,
 } from './ticTacToe_tools.js';
 
 // не уверен, что счет должен вестись здесь
@@ -74,7 +74,7 @@ export default (gameConf, currentRound) => {
   let winner = emptyCell;
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+    printCurrentRound(currentRound);
     printScoreboard(gameScore, name);
     printBoard(board);
     viewComputerWaiting(charComputer, colorX);
@@ -90,7 +90,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+    printCurrentRound(currentRound);
     printScoreboard(gameScore, name);
     printBoard(board);
     viewComputerWaiting(charComputer, colorY);
@@ -106,7 +106,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
-  console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`);
+  printCurrentRound(currentRound);
   printScoreboard(gameScore, name);
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer, name, avatar);

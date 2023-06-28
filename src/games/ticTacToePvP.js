@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { askQuestionRange, getRandomInt, printText } from '../tools.js';
 import {
-  checkWinner, gameCanContinue, printBoard, colorScore, printScore,
+  checkWinner, gameCanContinue, printBoard, colorScore, printScore, printCurrentRound,
 } from './ticTacToe_tools.js';
 
 const gameScore = [0, 0];
@@ -84,7 +84,7 @@ export default (gameConf, currentRound) => {
 
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    printCurrentRound(currentRound);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [x, y] = move.first(board, emptyCell, playerNameX);
@@ -98,7 +98,7 @@ export default (gameConf, currentRound) => {
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
-    console.log(`Текущий раунд: ${currentRound + 1}`);
+    printCurrentRound(currentRound);
     printScoreboard(gameScore, playerOneName, playerTwoName);
     printBoard(board);
     const [a, z] = move.second(board, emptyCell, playerNameY);
@@ -113,7 +113,7 @@ export default (gameConf, currentRound) => {
   }
 
   console.clear();
-  console.log(`Текущий раунд: ${currentRound + 1}`);
+  printCurrentRound(currentRound);
   printScoreboard(gameScore, playerOneName, playerTwoName);
   printBoard(board);
   printWinner(winner, charPlayer1, charPlayer2, gameConf);
