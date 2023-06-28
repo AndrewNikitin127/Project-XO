@@ -19,13 +19,15 @@ const colorStringPoints = (score, player1, player2) => {
   }
   return [colorScorePlayer1, colorScorePlayer2];
 };
-
+const getColoredBoardLine = (board, num) => (
+  chalk.bold(` ${board[num][0]} | ${board[num][1]} | ${board[num][2]} `)
+);
 const printBoard = (board) => {
-  console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));
+  console.log(`\n${getColoredBoardLine(board, 0)}`);
   console.log(chalk.strikethrough.bold('-----|-----|-----'));
-  console.log(chalk.bold(` ${board[1][0]} | ${board[1][1]} | ${board[1][2]} `));
+  console.log(`${getColoredBoardLine(board, 1)}`);
   console.log(chalk.strikethrough.bold('-----|-----|-----'));
-  console.log(chalk.bold(` ${board[2][0]} | ${board[2][1]} | ${board[2][2]} \n`));
+  console.log(`${getColoredBoardLine(board, 2)}\n`);
 };
 
 const boardHasEmptyCell = (board, emptyCell) => {
