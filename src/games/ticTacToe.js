@@ -12,18 +12,18 @@ const gameScore = [0, 0];
 const printScoreboard = (score, name) => {
   const playerName = (name === '') ? 'Человек' : name;
 
-  let humanScore;
-  let computerScore;
+  let humanScore = `${playerName} ${score[0]}`;
+  let computerScore = `${score[1]} Компьютер`;
 
   if (score[0] > score[1]) {
-    humanScore = chalk.green(`${playerName} ${score[0]}`);
-    computerScore = chalk.red(`${score[1]} Компьютер`);
+    humanScore = chalk.green(humanScore);
+    computerScore = chalk.red(computerScore);
   } else if (score[0] < score[1]) {
-    humanScore = chalk.red(`${playerName} ${score[0]}`);
-    computerScore = chalk.green(`${score[1]} Компьютер`);
+    humanScore = chalk.red(humanScore);
+    computerScore = chalk.green(computerScore);
   } else {
-    humanScore = chalk.hex('#B6E1FA')(`${playerName} ${score[0]}`);
-    computerScore = chalk.hex('#B6E1FA')(`${score[1]} Компьютер`);
+    humanScore = chalk.hex('#B6E1FA')(humanScore);
+    computerScore = chalk.hex('#B6E1FA')(computerScore);
   }
 
   console.log(`
