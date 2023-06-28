@@ -15,8 +15,8 @@ const printScoreboard = (score, playerOneName, playerTwoName) => {
     playerOneScore = chalk.red(playerOneScore);
     playerTwoScore = chalk.green(playerTwoScore);
   } else {
-    playerOneScore = chalk.hex('#B6E1FA')(`${playerOneName} ${score[0]}`);
-    playerTwoScore = chalk.hex('#B6E1FA')(`${score[1]} ${playerTwoName}`);
+    playerOneScore = chalk.hex('#B6E1FA')(playerOneScore);
+    playerTwoScore = chalk.hex('#B6E1FA')(playerTwoScore);
   }
 
   console.log(`
