@@ -3,7 +3,7 @@ import gradient from 'gradient-string';
 import { askQuestionRange, getRandomInt, pause } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
-  viewComputerWaiting, getStupidComputerAiMove, colorStringPoints,
+  viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore,
 } from './ticTacToe_tools.js';
 
 // не уверен, что счет должен вестись здесь
@@ -14,11 +14,8 @@ const printScoreboard = (score, name) => {
   const humanScore = `${playerName} ${score[0]}`;
   const computerScore = `${score[1]} Компьютер`;
 
-  const [humanScor, computerScor] = colorStringPoints(score, humanScore, computerScore);
-
-  console.log(`
-${chalk.hex('#71B0E8')('Счет игры')}
-${humanScor} ${chalk.hex('#B6E1FA')(':')} ${computerScor}`);
+  const [humanScor, computerScor] = colorScore(score, humanScore, computerScore);
+  printScore(humanScor, computerScor);
 };
 
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {

@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { askQuestionRange, getRandomInt } from '../tools.js';
 import {
-  checkWinner, gameCanContinue, printBoard, colorStringPoints,
+  checkWinner, gameCanContinue, printBoard, colorScore, printScore,
 } from './ticTacToe_tools.js';
 
 const gameScore = [0, 0];
@@ -10,11 +10,8 @@ const printScoreboard = (score, playerOneName, playerTwoName) => {
   const playerOneScore = `${playerOneName} ${score[0]}`;
   const playerTwoScore = `${score[1]} ${playerTwoName}`;
 
-  const [playerOneScor, playerTwoScor] = colorStringPoints(score, playerOneScore, playerTwoScore);
-
-  console.log(`
-${chalk.hex('#71B0E8')('Счет игры')}
-${playerOneScor} ${chalk.hex('#B6E1FA')(':')} ${playerTwoScor}`);
+  const [playerOneScor, playerTwoScor] = colorScore(score, playerOneScore, playerTwoScore);
+  printScore(playerOneScor, playerTwoScor);
 };
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {
