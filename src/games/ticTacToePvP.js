@@ -1,27 +1,20 @@
 import chalk from 'chalk';
 import { askQuestionRange, getRandomInt } from '../tools.js';
-import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
+import {
+  checkWinner, gameCanContinue, printBoard, colorStringPoints,
+} from './ticTacToe_tools.js';
 
 const gameScore = [0, 0];
 
 const printScoreboard = (score, playerOneName, playerTwoName) => {
-  let playerOneScore = `${playerOneName} ${score[0]}`;
-  let playerTwoScore = `${score[1]} ${playerTwoName}`;
+  const playerOneScore = `${playerOneName} ${score[0]}`;
+  const playerTwoScore = `${score[1]} ${playerTwoName}`;
 
-  if (score[0] > score[1]) {
-    playerOneScore = chalk.green(playerOneScore);
-    playerTwoScore = chalk.red(playerTwoScore);
-  } else if (score[0] < score[1]) {
-    playerOneScore = chalk.red(playerOneScore);
-    playerTwoScore = chalk.green(playerTwoScore);
-  } else {
-    playerOneScore = chalk.hex('#B6E1FA')(playerOneScore);
-    playerTwoScore = chalk.hex('#B6E1FA')(playerTwoScore);
-  }
+  const [playerOneScor, playerTwoScor] = colorStringPoints(score, playerOneScore, playerTwoScore);
 
   console.log(`
 ${chalk.hex('#71B0E8')('Счет игры')}
-${playerOneScore} ${chalk.hex('#B6E1FA')(':')} ${playerTwoScore}`);
+${playerOneScor} ${chalk.hex('#B6E1FA')(':')} ${playerTwoScor}`);
 };
 
 function printWinner(winner, charPlayer1, charPlayer2, gameConf) {

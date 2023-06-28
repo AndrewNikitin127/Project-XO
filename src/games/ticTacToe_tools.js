@@ -4,6 +4,22 @@ import { getRandomInt, pause } from '../tools.js';
 
 // support functions
 
+const colorStringPoints = (score, player1, player2) => {
+  let colorScorePlayer1;
+  let colorScorePlayer2;
+  if (score[0] > score[1]) {
+    colorScorePlayer1 = chalk.green(player1);
+    colorScorePlayer2 = chalk.red(player2);
+  } else if (score[0] < score[1]) {
+    colorScorePlayer1 = chalk.red(player1);
+    colorScorePlayer2 = chalk.green(player2);
+  } else {
+    colorScorePlayer1 = chalk.hex('#B6E1FA')(player1);
+    colorScorePlayer2 = chalk.hex('#B6E1FA')(player2);
+  }
+  return [colorScorePlayer1, colorScorePlayer2];
+};
+
 const printBoard = (board) => {
   console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));
   console.log(chalk.strikethrough.bold('-----|-----|-----'));
@@ -136,5 +152,5 @@ const getStupidComputerAiMove = (board, emptyCell, charPlayer1, charComputer) =>
 
 export {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
-  viewComputerWaiting, getStupidComputerAiMove,
+  viewComputerWaiting, getStupidComputerAiMove, colorStringPoints,
 };

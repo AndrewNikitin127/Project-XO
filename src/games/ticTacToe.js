@@ -3,7 +3,7 @@ import gradient from 'gradient-string';
 import { askQuestionRange, getRandomInt, pause } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
-  viewComputerWaiting, getStupidComputerAiMove,
+  viewComputerWaiting, getStupidComputerAiMove, colorStringPoints,
 } from './ticTacToe_tools.js';
 
 // не уверен, что счет должен вестись здесь
@@ -11,24 +11,14 @@ const gameScore = [0, 0];
 
 const printScoreboard = (score, name) => {
   const playerName = (name === '') ? 'Человек' : name;
+  const humanScore = `${playerName} ${score[0]}`;
+  const computerScore = `${score[1]} Компьютер`;
 
-  let humanScore = `${playerName} ${score[0]}`;
-  let computerScore = `${score[1]} Компьютер`;
-
-  if (score[0] > score[1]) {
-    humanScore = chalk.green(humanScore);
-    computerScore = chalk.red(computerScore);
-  } else if (score[0] < score[1]) {
-    humanScore = chalk.red(humanScore);
-    computerScore = chalk.green(computerScore);
-  } else {
-    humanScore = chalk.hex('#B6E1FA')(humanScore);
-    computerScore = chalk.hex('#B6E1FA')(computerScore);
-  }
+  const [humanScor, computerScor] = colorStringPoints(score, humanScore, computerScore);
 
   console.log(`
 ${chalk.hex('#71B0E8')('Счет игры')}
-${humanScore} ${chalk.hex('#B6E1FA')(':')} ${computerScore}`);
+${humanScor} ${chalk.hex('#B6E1FA')(':')} ${computerScor}`);
 };
 
 const printWinner = (winner, charPlayer1, charComputer, playerOneName, playerOneAvatar) => {
