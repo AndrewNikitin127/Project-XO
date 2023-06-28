@@ -5,15 +5,15 @@ import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
 const gameScore = [0, 0];
 
 const printScoreboard = (score, playerOneName, playerTwoName) => {
-  let playerOneScore;
-  let playerTwoScore;
+  let playerOneScore = `${playerOneName} ${score[0]}`;
+  let playerTwoScore = `${score[1]} ${playerTwoName}`;
 
   if (score[0] > score[1]) {
-    playerOneScore = chalk.green(`${playerOneName} ${score[0]}`);
-    playerTwoScore = chalk.red(`${score[1]} ${playerTwoName}`);
+    playerOneScore = chalk.green(playerOneScore);
+    playerTwoScore = chalk.red(playerTwoScore);
   } else if (score[0] < score[1]) {
-    playerOneScore = chalk.red(`${playerOneName} ${score[0]}`);
-    playerTwoScore = chalk.green(`${score[1]} ${playerTwoName}`);
+    playerOneScore = chalk.red(playerOneScore);
+    playerTwoScore = chalk.green(playerTwoScore);
   } else {
     playerOneScore = chalk.hex('#B6E1FA')(`${playerOneName} ${score[0]}`);
     playerTwoScore = chalk.hex('#B6E1FA')(`${score[1]} ${playerTwoName}`);
