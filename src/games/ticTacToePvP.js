@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { askQuestionRange, getRandomInt, printText } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, colorScore, printScore, printCurrentRound,
+  getNewScoreNumObj,
 } from './ticTacToe_tools.js';
 
 const gameScore = [0, 0];
@@ -90,11 +91,7 @@ export default (gameConf, currentRound) => {
     const [x, y] = move.first(board, emptyCell, playerNameX);
     board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
-    if (winner === charPlayer1) {
-      gameScore[0] += 1;
-    } else if (winner === charPlayer2) {
-      gameScore[1] += 1;
-    }
+
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
     console.clear();
@@ -104,15 +101,15 @@ export default (gameConf, currentRound) => {
     const [a, z] = move.second(board, emptyCell, playerNameY);
     board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
-    if (winner === charPlayer1) {
-      gameScore[0] += 1;
-    } else if (winner === charPlayer2) {
-      gameScore[1] += 1;
-    }
+
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
-
   console.clear();
+
+  const newScoreObj = getNewScoreNumObj(winner, charPlayer1, charPlayer2);
+  gameScore[0] += newScoreObj.scorePlayer1;
+  gameScore[1] += newScoreObj.scorePlayer2;
+
   printCurrentRound(currentRound);
   printScoreboard(gameScore, playerOneName, playerTwoName);
   printBoard(board);

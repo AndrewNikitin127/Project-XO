@@ -4,6 +4,18 @@ import { getRandomInt, pause } from '../tools.js';
 
 // support functions
 
+const getNewScoreNumObj = (winner, charPlayer1, charPlayer2) => {
+  let scorePlayer1 = 0;
+  let scorePlayer2 = 0;
+
+  if (winner === charPlayer1) {
+    scorePlayer1 += 1;
+  } else if (winner === charPlayer2) {
+    scorePlayer2 += 1;
+  }
+  return { scorePlayer1, scorePlayer2 };
+};
+
 const printCurrentRound = (currentRound) => (
   console.log(`${chalk.hex('#71B0E8')('Текущий раунд:')} ${chalk.hex('#B6E1FA')(currentRound + 1)}`)
 );
@@ -186,4 +198,5 @@ const getStupidComputerAiMove = (board, emptyCell, charPlayer1, charComputer) =>
 export {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
   viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore, printCurrentRound,
+  getNewScoreNumObj,
 };

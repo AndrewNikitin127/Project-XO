@@ -4,6 +4,7 @@ import { askQuestionRange, getRandomInt, pause } from '../tools.js';
 import {
   checkWinner, gameCanContinue, printBoard, getComputerRandomMove, getComputerAiMove,
   viewComputerWaiting, getStupidComputerAiMove, colorScore, printScore, printCurrentRound,
+  getNewScoreNumObj,
 } from './ticTacToe_tools.js';
 
 // не уверен, что счет должен вестись здесь
@@ -81,11 +82,6 @@ export default (gameConf, currentRound) => {
     const [x, y] = move.first(board, emptyCell, charPlayer1, charComputer);
     board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
-    if (winner === charPlayer1) {
-      gameScore[0] += 1;
-    } else if (winner === charComputer) {
-      gameScore[1] += 1;
-    }
 
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
@@ -97,15 +93,14 @@ export default (gameConf, currentRound) => {
     const [a, z] = move.second(board, emptyCell, charPlayer1, charComputer);
     board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
-    if (winner === charPlayer1) {
-      gameScore[0] += 1;
-    } else if (winner === charComputer) {
-      gameScore[1] += 1;
-    }
 
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   console.clear();
+  const newScoreObj = getNewScoreNumObj(winner, charPlayer1, charComputer);
+  gameScore[0] += newScoreObj.scorePlayer1;
+  gameScore[1] += newScoreObj.scorePlayer2;
+
   printCurrentRound(currentRound);
   printScoreboard(gameScore, name);
   printBoard(board);
