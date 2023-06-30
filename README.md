@@ -14,13 +14,13 @@ To start the game, use the command: `playgame`, then select one of the game mode
 
 After selecting the single player mode (key [1]), you will need to enter your name and choose an avatar that you like, specify the number of rounds and choose the difficulty of the game.
 
-[![asciicast](https://asciinema.org/a/a63Ad33VE6fLEq2lTj8PA5Zln.svg)](https://asciinema.org/a/a63Ad33VE6fLEq2lTj8PA5Zln)
+[![asciicast](https://asciinema.org/a/QPUuqycFUNUYzpWftRXFTWvyG.svg)](https://asciinema.org/a/QPUuqycFUNUYzpWftRXFTWvyG)
 
 ## PvP mode
 
 If you have chosen the "game for two" mode (key [2]), you will need to enter the name of the first and second player, after which each player will choose an avatar, also do not forget to specify the number of rounds.
 
-[![asciicast](https://asciinema.org/a/JQ7BAX40ZPSfQvg4rm7bw0Ihs.svg)](https://asciinema.org/a/JQ7BAX40ZPSfQvg4rm7bw0Ihs)
+[![asciicast](https://asciinema.org/a/Vy4v4N29gvDn3mBAkD0o7JRcg.svg)](https://asciinema.org/a/Vy4v4N29gvDn3mBAkD0o7JRcg)
 
 ### Maintainability status:
 
