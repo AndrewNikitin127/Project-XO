@@ -10,9 +10,11 @@
 ## Setup
 
 To install the game, use the commands:
-`git clone git@github.com:AndrewNikitin127/project-XO.git`
-`cd project-XO`
-`make install`
+```sh
+git clone git@github.com:AndrewNikitin127/project-XO.git
+cd project-XO
+make install
+```
 
 ## Run program
 
